@@ -14,7 +14,7 @@ Snigdha Ansu
 
 GitHub user names:
 ALWISH007
-sanskarsinghai
+Sanskarsinghai
 sniggy10
 
 
