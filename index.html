@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  
+    </head>
+    <body style="background-image: url(https://external-preview.redd.it/kt0XTn_h-XaGZs8T63QQ8Zphwk6Z4bLQN_uLZO-OxZg.jpg?width=960&crop=smart&auto=webp&s=509f7ed55e48b3c307ca960cf069a054aeb19052);background-size:cover;height: 100%;background-repeat:no-repeat">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- <form> -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <h5>Trains</h5>
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                      
+                      
+                          <form class="form-inline my-2 my-lg-0">
+                            <button class="btn btn-outline-success my-2 my-sm-0" style="float:right">Live Train Status</button>
+                          </form>
+                        </div>
+                      </nav>
+            <div class="inp" style="background-color: azure; opacity:0.8; border-radius:5px; padding:10px">
+                <div style="text-align:center">
+            Train Number:<br>
+            <input type="text" name="train-no" id="input1"><br>
+            Station Code:<br>
+            <input type="text" name="Station_code" id="input2">
+            <br>Date:<br>
+            <input type="date" name="Date" id="input3">
+            <button onclick="myFunc()">Click me</button>
+          <!-- </form> -->
+          </div>
+        </div>
+        <div style="background-color: azure; opacity:0.8; border-radius:5px"><ul id="list"></ul></div>
+          
+
+         
+      
+        <div class="container" style="min-width:316px"></div>
+        <!-- <script src="app.js" async defer></script> -->
+        <script>
+        function myFunc(){
+        var train_no= document.getElementById('input1').value;
+        var station_code=document.getElementById('input2').value;
+        var date=document.getElementById('input3').value;
+        
+       
+
+        var d=date.split('-');
+        var dt=d[2]+'-'+d[1]+'-'+d[0];
+        
+        
+        const list=document.getElementById("list");
+        
+        let xhr=new XMLHttpRequest;
+        xhr.addEventListener('load',function(){
+            var response=JSON.parse(this.responseText);
+            /*var data1=[(new Date).getTime(),parseFloat(response.bpi.USD.rate)]*/
+            var arrHead = ["Current status : "+response.position,"Station code: "+response.station.code,"Station name: "+response.station.name,"Late by minutes: "+response.status.latemin,"train name: "+response.train.name];  
+            
+            console.log(response)
+            for (let i in arrHead ){
+             var li=document.createElement("li")
+             li.innerText=arrHead[i]
+            list.appendChild(li)
+            }
+
+        
+           
+
+    
+        
+        })
+        xhr.open('GET','http://api.railwayapi.com/v2/live/train/'+train_no+'/station/'+station_code+'/date/'+dt+'/apikey/zqlhy1ik8n/');
+        xhr.send(); 
+    }
+    
+
+       </script>
+    </body>
+</html>
+
+
+  
