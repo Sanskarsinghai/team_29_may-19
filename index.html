@@ -26,7 +26,7 @@
         <!-- <form> -->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                         <h5>Trains</h5>
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="frontpage.html">Home <span class="sr-only">(current)</span></a>
                       
                       
                           <form class="form-inline my-2 my-lg-0">
@@ -71,7 +71,7 @@
         xhr.addEventListener('load',function(){
             var response=JSON.parse(this.responseText);
             /*var data1=[(new Date).getTime(),parseFloat(response.bpi.USD.rate)]*/
-            var arrHead = ["Current status : "+response.position,"Station code: "+response.station.code,"Station name: "+response.station.name,"Late by minutes: "+response.status.latemin,"train name: "+response.train.name];  
+            var arrHead = ["Current status : "+response.position,"Station code: "+response.station.code,"Station name: "+response.station.name,"Late by minutes: "+response.status.latemin,"train name: "+response.train.name,"has_dept:"+response.status.has_departed, "has_arrived: "+response.status.has_departed,"departure_time:"+response.status.actdep];  
             
             console.log(response)
             for (let i in arrHead ){
